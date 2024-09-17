@@ -4,14 +4,14 @@ Somos Francisco Fernandez y Martin Urbistondo.
  
  Nuestro trabajo va a consistir de una aplicaion de venta de comida estilo: pedidos ya, rappi , etc.
     
-Basicamente contamos con una tabla principal llamada 'alimento',
+Basicamente contamos con una tabla principal llamada 'productos',
 en la que se van a especificar el tipo de comida/bebida que se venden, 
-esta tabla contiene un id_alimento y un nombre, el que hace referencia al tipo: ENTRADAS, PRINCIPALES, POSTRES, BEBIDAS. 
-Las cuales van a ser cada una por su cuenta una tabla aparte.
-En estas tabalas se va a detallar un id unico, el nombre, un valor, una descripcion (de que se trata el plato) y por ultimo un id_alimento 
-el cual va ser el encargado de conectarse con la tabla principal tomando el rol de clave foranea; 
-Este id_alimento va a ser el mismo para toda la tabla, siento este relacionado al id de cada tipo de aliemnto de la tabla principal.
+esta tabla contiene un id_producto y un nombre, el que hace referencia al tipo: ENTRADAS, PRINCIPALES, POSTRES, BEBIDAS. 
+Esta tabla se va a vincular con una tabla llamada alimentos, en la cual se van a detallar cada uno de los alimentos. La tabla
+esta formada por un id_alimento, un nombre, una descripcion, un valor y un id_producto mediante el cual se van a conectar las dos tablas.
+Por ejemplo, si se quiere agregar un plato principal se le va a dar id_producto = 2.
 
 
-![Diagrama de Entidad Relacion](https://github.com/user-attachments/assets/02e84241-54d1-4084-8fa1-3602be3bdd4f)
+![Diagrama de Entidad Relacion (DER)](https://github.com/user-attachments/assets/7656dd97-e846-4a7b-bcaa-7839cd16b882)
+
 
