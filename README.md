@@ -11,4 +11,5 @@ el cual va ser el encargado de conectarse con la tabla principal tomando el rol 
 Este id_alimento va a ser el mismo para toda la tabla, siento este relacionado al id de cada tipo de aliemnto de la tabla principal.
 
 
-    ![Diagrama en blanco](https://github.com/user-attachments/assets/38825779-ebbf-40cc-964f-26e6cf8865a6)
+![Diagrama de Entidad Relacion](https://github.com/user-attachments/assets/02e84241-54d1-4084-8fa1-3602be3bdd4f)
+
