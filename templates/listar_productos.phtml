@@ -1,0 +1,12 @@
+<?php
+
+$arrCategory = [];
+foreach($categorys as $category){
+    $arrCategory[$category->id_producto] = $category->nombre;
+}?>
+    <a href="administracion"> <?php echo 'administracion' ?></a>
+        <ul><?php
+            foreach($products as $product){?>
+                <li><span><?php echo $arrCategory[$product->id_producto].': '?></span><?php echo $product->nombre ?> <a href="about/<?php echo $product->id_alimento ?>">ver mas</a></li><?php
+            }?>
+        </ul>
