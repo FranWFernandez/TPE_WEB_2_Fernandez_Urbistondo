@@ -1,0 +1,24 @@
+<?php require './templates/header.phtml' ?>
+
+<section id="home"> 
+    <?php require './templates/carrousel.phtml' ?>
+    <div class="container-fluid">
+        <div class="row">
+            <?php foreach($fran as $product): ?>
+                <div class="col-md-4 mb-4 text-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text"><?= $product->nombre ?></p>
+                            <a href="showitem/<?=$product->id_alimento ?>" class="btn btn-secondary btn-lg">Ver Mas</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</section>
+
+
+
+<?php require './templates/footer.phtml' ?>

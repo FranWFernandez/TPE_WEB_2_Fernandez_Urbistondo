@@ -1,7 +1,8 @@
 <?php
 require_once './app/models/product.model.php';
 require_once './app/views/product.view.php';
-require_once './app/models/category.model.php';
+require_once './app/models/categories.model.php';
+require_once './app/helpers/auth.helper.php';
 
 class ProductController {
 
@@ -10,6 +11,7 @@ class ProductController {
     private $category;
 
     public function __construct() {
+        AuthHelper::verify();
         $this->model = new ProductModel;
         $this->view = new ProductView;
         $this->category = new CategoryModel;
@@ -17,85 +19,64 @@ class ProductController {
 
     public function showProducts() {
         $products = $this->model->getProducts();
-        $categorys = $this->category->getCategorys();
-        $this->view->viewProducts($products, $categorys);
+        $categories = $this->category->getCategories();
+        $this->view->showProducts($products, $categories);
     }
 
-    public function showAbout($id) {
+    /* public function showAbout($id) {
 
         $product = $this->model->getProduct($id);
         $category = $this->category->getCategory($product->id_producto);
 
         $this->view->viewAbout($product, $category); 
-    }
-
-    public function showAdmin() {
-        $products = $this->model->getProducts();
-        $categorys = $this->category->getCategorys();
-        $this->view->viewAdmin($products, $categorys);
-    }
+    } */
 
     public function addProduct() {
 
-        if(!isset($_POST['nombre']) || empty($_POST['nombre'])){
-            echo 'ERROR: falta completar el nombre';
+        if(empty($_POST['nombre']) || empty($_POST['valor']) || empty($_POST['descripcion']) || empty($_POST['tipo'])){
+            $this->view->showError("Debe completar todos los campos");
+        } else {
+            $nombre = $_POST['nombre'];
+            $valor = $_POST['valor'];
+            $descripcion = $_POST['descripcion'];
+            $tipo = $_POST['tipo'];
+            $id = $this->model->insertProduct($nombre, $valor, $descripcion, $tipo);
+            if ($id) {
+                header('location:'.BASE_URL.'/editproducts');
+            } else {
+                $this->view->showError("Error al insertar producto");
+            }
         }
-        if(!isset($_POST['valor']) || empty($_POST['valor'])){
-            echo 'ERROR: falta completar el valor';
-        }
-        if(!isset($_POST['descripcion']) || empty($_POST['descripcion'])){
-            echo 'ERROR: falta completar la descripcion';
-        }
-        if(!isset($_POST['tipo']) || empty($_POST['tipo'])){
-            echo 'ERROR: falta completar el tipo';
-        }
-
-        $nombre = $_POST['nombre'];
-        $valor = $_POST['valor'];
-        $descripcion = $_POST['descripcion'];
-        $tipo = $_POST['tipo'];
-
-        $this->model->insertProduct($nombre, $valor, $descripcion, $tipo);
-
-        header('location:'.BASE_URL.'administracion');
     }
 
     public function deleteProduct($id) {
         $this->model->removeProduct($id);
 
-        header('location:'.BASE_URL.'administracion');
+        header('location:'.BASE_URL.'/editproducts');
     }
 
-    public function showModify() {
-        $this->view->viewFormModify();
+    public function updateProduct() {
+        if(empty ($_POST['id_editproduct']) || empty($_POST['nombre']) || empty($_POST['valor']) || empty($_POST['descripcion']) || empty($_POST['tipo'])){
+            $this->view->showError("ERROR EN EDITAR");
+        } else {
+            $id = $_POST['id_editproduct'];
+            $nombre = $_POST['nombre'];
+            $valor = $_POST['valor'];
+            $descripcion = $_POST['descripcion'];
+            $tipo = $_POST['tipo'];
+            
+            $this->model->updateProduct($id, $nombre, $valor, $descripcion, $tipo, $id);
+            
+            if ($id) {
+                header('location:'.BASE_URL.'/editproducts');                
+            } else {
+                $this->view->showError("Error al editar el producto");
+            }
+        }
     }
 
-    public function modify($id) {
-        if (empty($_POST)){
-            $this->showModify();
-        }else{
-        
-        if(!isset($_POST['nombre']) || empty($_POST['nombre'])){
-            echo 'ERROR: falta completar el nombre';
-        }
-        if(!isset($_POST['valor']) || empty($_POST['valor'])){
-            echo 'ERROR: falta completar el valor';
-        }
-        if(!isset($_POST['descripcion']) || empty($_POST['descripcion'])){
-            echo 'ERROR: falta completar la descripcion';
-        }
-        if(!isset($_POST['tipo']) || empty($_POST['tipo'])){
-            echo 'ERROR: falta completar el tipo';
-        }
-
-        $nombre = $_POST['nombre'];
-        $valor = $_POST['valor'];
-        $descripcion = $_POST['descripcion'];
-        $tipo = $_POST['tipo'];
-
-        $this->model->remakeProduct($nombre, $valor, $descripcion, $tipo, $id);
-        
-        header('location:'.BASE_URL.'administracion');
-    }
+    public function showByCategory($product_id) {
+        $productbycat = $this->model->getProductByCategory($product_id);
+        $this->view->showByCategory($productbycat);
     }
 }

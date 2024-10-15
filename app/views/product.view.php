@@ -3,22 +3,16 @@ require_once './app/controllers/product.controller.php';
 
 class ProductView {
 
-    public function viewProducts($products, $categorys) {   
-        require_once './templates/listar_productos.phtml';
+    public function showProducts($products, $categories) {   
+        require_once './templates/listproducts.phtml';
     }
 
-    public function viewAbout($product, $category) {
-
-        require_once './templates/about_producto.phtml';
+    public function showError($error) {
+        require_once './templates/error.phtml';
     }
 
-    public function viewAdmin($products, $categorys) {
-        require_once './templates/form_alta_producto.phtml';
+    public function showByCategory($itemCat) {
 
-        require_once './templates/vista_admin.phtml';       
-    }
-
-    public function viewFormModify() {
-        require_once './templates/form_modificar_producto.phtml';
+        require 'templates/showbycategory.phtml';
     }
 }

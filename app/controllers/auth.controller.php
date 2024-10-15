@@ -1,50 +1,45 @@
 <?php
 require_once './app/models/user.model.php';
 require_once './app/views/auth.view.php';
+require_once './app/helpers/auth.helper.php';
 
 class AuthController {
-
-    private $model;
     private $view;
+    private $model;
 
-    public function __construct() {
+    function __construct() {
         $this->model = new UserModel();
         $this->view = new AuthView();
     }
 
     public function showLogin() {
-        return $this->view->showLogin();
+        $this->view->showLogin();
     }
 
-    public function login() {
-        if (!isset($_POST['email']) || empty($_POST['email'])) {
-            return $this->view->showLogin('Falta completar el nombre de usuario');
-        }
-    
-        if (!isset($_POST['password']) || empty($_POST['password'])) {
-            return $this->view->showLogin('Falta completar la contraseña');
-        }
-
+    public function autenticar() {
         $email = $_POST['email'];
         $password = $_POST['password'];
+      
 
-        $userFromDB = $this->model->getUser($email);
+        if (empty($email) || empty($password)) {
+            $this->view->showLogin('Faltan completar datos');
+            die();
+        }
 
-        if($userFromDB && password_verify($password, $userFromDB->password)){
-            session_start();
-            $_SESSION['ID_USER'] = $userFromDB->id;
-            $_SESSION['EMAIL_USER'] = $userFromDB->email;
-            $_SESSION['LAST_ACTIVITY'] = time();
-    
-            header('Location: ' . BASE_URL . 'administracion');
+        $user = $this->model->getUser($email);
+        if ($user && password_verify($password, $user->PASSWORD)) {
+           
+            AuthHelper::login($user);
+            
+           header('Location: ' . BASE_URL . '/editarproductos');
+            
         } else {
-            return $this->view->showLogin('Credenciales incorrectas');
+            $this->view->showLogin('Usuario inválido');
         }
     }
 
     public function logout() {
-        session_start(); 
-        session_destroy(); 
-        header('Location: ' . BASE_URL);
+        AuthHelper::logout();
+        header('Location: ' . BASE_URL);    
     }
 }

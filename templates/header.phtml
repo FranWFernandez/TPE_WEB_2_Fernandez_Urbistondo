@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>B&G</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-black navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand h1" href="home">BITE & GO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="home">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
+                            <ul class="dropdown-menu dropdown-menu-dark"> 
+                                <?php  foreach ($categories as $category) : ?>
+                                    <li><a name="filterByCategoria" class="dropdown-item" href="showbycategoria/"></a></li>
+                                <?php  endforeach ?>  
+                            </ul> 
+                        </li>
+                    </ul>
+                </div>
+                <ul class="navbar-nav align-items-center ml-4 p-2">
+                    <?php if (!isset($_SESSION['ID_USER'])) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="login">Login</a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="editproducts">Editar Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="editcategory">Editar Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <?= $_SESSION['EMAIL_USER'] ?>
+                            <a class="nav-link" aria-current="page" href="logout">Logout (<?= $_SESSION['EMAIL_USER'] ?>)</a>
+                        </li>
+                    <?php endif ?>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container mt-5 mb-5">

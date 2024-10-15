@@ -1,0 +1,31 @@
+<h1>Editar Producto</h1>
+<form action="editarproducto" method="POST" class="row g-3 border border-bottom border-primary m-5">
+    <div class="col-md-6">
+        <label class="form-label">Id a editar</label>
+        <input name="id_productoEditar" type="text" class="form-control">
+    </div>    
+    <div class="col-md-6">
+        <label class="form-label">Producto</label>
+        <input type="text" name="nombre" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Valor</label>
+        <input type="decimal" name="valor" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Descripcion</label>
+        <textarea class="form-control" name="descripcion" rows="3"></textarea>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">id_categoria</label>
+        <select name="tipo">
+            <option value="1">Entrada</option>
+            <option value="2">Principal</option>
+            <option value="3">Postre</option>
+            <option value="4">Bebida</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <button type="submite" class="btn btn-primary position-absolute end-0">Modificar</button>
+    </div>
+</form>
