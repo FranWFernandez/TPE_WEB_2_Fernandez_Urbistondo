@@ -3,13 +3,13 @@
 <section id="ShowByCategoria"> 
     <div class="container-fluid">
         <div class="row">
-            <?php foreach($itemCat as $product): ?>
+            <?php foreach($productbycat as $product): ?>
                 <div class="col-md-4 mb-4 text-center">
                     <div class="card" style="width: 18rem;">
                         <img src="..." class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text"><?= $product->nombre ?> (<?= $product->id_producto?>)</p>
-                            <a href="showitem/<?=$product->id_alimento ?>" class="btn btn-secondary btn-lg">Buy Now</a>
+                            <p class="card-text"><?= $product->nombre ?></p>
+                            <a href="/showitem/<?=$product->id_alimento ?>" class="btn btn-secondary btn-lg">Ver Mas</a>
                         </div>
                     </div>
                 </div>

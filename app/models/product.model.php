@@ -18,12 +18,18 @@ class ProductModel extends DB{
         $query->execute([$id]);
 
         $product = $query->fetch(PDO::FETCH_OBJ);
+            // Verifica si no se encontró el producto
+        if (!$product) {
+            return false; // Devuelve false si no se encuentra
+        }
+
         return $product;
     }
 
-    public function insertProduct($nombre, $valor, $descripcion, $tipo) {
+    public function insertProduct($nombre, $descripcion, $valor, $id_producto) {
         $query = $this->connect()->prepare('INSERT INTO alimentos(nombre, descripcion, valor, id_producto) VALUE(?,?,?,?)');
-        $query->execute([$nombre, $descripcion, $valor, $tipo]);
+        $query->execute([$nombre, $descripcion, $valor, $id_producto]);
+        return $this->connect()->lastInsertId();
     }
 
     public function removeProduct($id) {
@@ -31,14 +37,14 @@ class ProductModel extends DB{
         $query->execute([$id]);
     }
 
-    public function updateProduct($nombre, $descripcion, $valor, $tipo, $id) {
+    public function updateProduct($id ,$nombre, $descripcion, $valor, $id_producto) {
         $query = $this->connect()->prepare('UPDATE alimentos SET nombre = ?, descripcion = ?, valor = ?, id_producto = ? WHERE id_alimento = ?');
-        $query->execute([$nombre, $descripcion, $valor, $tipo, $id]);
+        $query->execute([$nombre, $descripcion, $valor, $id_producto, $id]);
     }
 
-    public function getProductByCategory($id_product) {
+    public function getProductByCategory($id_producto) {
         $query = $this->connect()->prepare('SELECT * FROM alimentos where id_producto=?');
-        $query->execute([$id_product]);
+        $query->execute([$id_producto]);
 
         $itemCat = $query->fetchAll(PDO::FETCH_OBJ);
         return $itemCat;

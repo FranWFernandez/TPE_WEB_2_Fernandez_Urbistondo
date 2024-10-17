@@ -26,12 +26,12 @@ class AuthController {
             die();
         }
 
-        $user = $this->model->getUser($email);
+        $user = $this->model->getUser($email); 
         if ($user && password_verify($password, $user->PASSWORD)) {
            
             AuthHelper::login($user);
             
-           header('Location: ' . BASE_URL . '/editarproductos');
+            header('Location: ' . BASE_URL . '/product');
             
         } else {
             $this->view->showLogin('Usuario inválido');

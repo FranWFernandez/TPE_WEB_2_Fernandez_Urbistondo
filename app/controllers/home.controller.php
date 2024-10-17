@@ -15,13 +15,18 @@
         }
 
         public function showHome() {
-            $fran = $this->model->getProducts();
+            $products = $this->model->getProducts();
             $categories = $this->categorymodel->getCategories();
-            $this->view->showHome($fran);
+            $this->view->showHome($products,$categories);
         }
 
         public function showAboutItem($id){
             $Item= $this->model->getProductById($id);
-            $this->view->showItem($Item);
+            
+            if ($Item) {
+                $this->view->showItem($Item); // Muestra el producto si existe
+            } else {
+                $this->view->showError("Producto no encontrado"); // Maneja el caso en que no se encuentre el producto
+            }
         }
     }

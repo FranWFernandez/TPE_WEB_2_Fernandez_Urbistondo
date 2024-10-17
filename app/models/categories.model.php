@@ -20,9 +20,9 @@ class CategoryModel extends DB{
         return $category->nombre;
     }
 
-    function insertCategory($name_category) {
+    function insertCategory($category) {
         $query = $this->connect()->prepare('INSERT INTO `productos` (`nombre`) VALUES(?)');
-        $query->execute([$name_category]);
+        $query->execute([$category]);
         return $this->connect()->lastInsertId();
     }
 

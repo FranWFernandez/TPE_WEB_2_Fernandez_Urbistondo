@@ -11,7 +11,7 @@ class ProductController {
     private $category;
 
     public function __construct() {
-        AuthHelper::verify();
+
         $this->model = new ProductModel;
         $this->view = new ProductView;
         $this->category = new CategoryModel;
@@ -32,17 +32,19 @@ class ProductController {
     } */
 
     public function addProduct() {
+        
+        AuthHelper::verify();
 
-        if(empty($_POST['nombre']) || empty($_POST['valor']) || empty($_POST['descripcion']) || empty($_POST['tipo'])){
+        if(empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("Debe completar todos los campos");
         } else {
             $nombre = $_POST['nombre'];
-            $valor = $_POST['valor'];
             $descripcion = $_POST['descripcion'];
-            $tipo = $_POST['tipo'];
-            $id = $this->model->insertProduct($nombre, $valor, $descripcion, $tipo);
+            $valor = $_POST['valor'];
+            $id_producto = $_POST['id_producto'];
+            $id = $this->model->insertProduct($nombre, $descripcion, $valor, $id_producto);
             if ($id) {
-                header('location:'.BASE_URL.'/editproducts');
+                header('location:'.BASE_URL.'/product');
             } else {
                 $this->view->showError("Error al insertar producto");
             }
@@ -50,33 +52,39 @@ class ProductController {
     }
 
     public function deleteProduct($id) {
+
+        AuthHelper::verify();
+
         $this->model->removeProduct($id);
 
-        header('location:'.BASE_URL.'/editproducts');
+        header('location:'.BASE_URL.'/product');
     }
 
     public function updateProduct() {
-        if(empty ($_POST['id_editproduct']) || empty($_POST['nombre']) || empty($_POST['valor']) || empty($_POST['descripcion']) || empty($_POST['tipo'])){
+
+        AuthHelper::verify();
+        
+        if(empty ($_POST['id_productoEditar']) || empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("ERROR EN EDITAR");
         } else {
-            $id = $_POST['id_editproduct'];
+            $id = $_POST['id_productoEditar'];
             $nombre = $_POST['nombre'];
-            $valor = $_POST['valor'];
             $descripcion = $_POST['descripcion'];
-            $tipo = $_POST['tipo'];
+            $valor = $_POST['valor'];
+            $id_producto = $_POST['id_producto'];
             
-            $this->model->updateProduct($id, $nombre, $valor, $descripcion, $tipo, $id);
+            $this->model->updateProduct($id, $nombre, $descripcion, $valor, $id_producto);
             
             if ($id) {
-                header('location:'.BASE_URL.'/editproducts');                
+                header('location:'.BASE_URL.'/product');                
             } else {
                 $this->view->showError("Error al editar el producto");
             }
         }
     }
 
-    public function showByCategory($product_id) {
-        $productbycat = $this->model->getProductByCategory($product_id);
+    public function showByCategory($id_producto) {
+        $productbycat = $this->model->getProductByCategory($id_producto);
         $this->view->showByCategory($productbycat);
     }
 }
