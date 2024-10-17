@@ -10,7 +10,7 @@ class CategoriesController {
 
 
     public function __construct() {
-
+        AuthHelper::verify();
         $this->viewCategory = new CategoriesView();
         $this->modelCategory = new CategoryModel();
     }
@@ -24,7 +24,7 @@ class CategoriesController {
 
     public function addCategory() {
 
-        AuthHelper::verify();
+
 
         if ( empty($_POST['categoriaAdd'])) {
             $this->viewCategory->showError("Debe completar todos los campos");
@@ -41,7 +41,7 @@ class CategoriesController {
     
     public function updateCategory(){
 
-        AuthHelper::verify();
+
 
         if (empty($_POST['id_categoriaEditar']) ||empty($_POST['categoriaEditar']) ) {
             $this->viewCategory->showError("ERROR EN EDITAR");
@@ -62,8 +62,6 @@ class CategoriesController {
 
     function removeCategory($id) {
 
-        AuthHelper::verify();
-        
         $this->modelCategory->deleteCategory($id);
         header('Location: ' . BASE_URL . '/category');
     }

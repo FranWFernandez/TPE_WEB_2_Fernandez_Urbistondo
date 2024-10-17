@@ -11,7 +11,7 @@ class ProductController {
     private $category;
 
     public function __construct() {
-
+        AuthHelper::verify();
         $this->model = new ProductModel;
         $this->view = new ProductView;
         $this->category = new CategoryModel;
@@ -33,7 +33,7 @@ class ProductController {
 
     public function addProduct() {
         
-        AuthHelper::verify();
+
 
         if(empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("Debe completar todos los campos");
@@ -53,7 +53,7 @@ class ProductController {
 
     public function deleteProduct($id) {
 
-        AuthHelper::verify();
+
 
         $this->model->removeProduct($id);
 
@@ -62,7 +62,7 @@ class ProductController {
 
     public function updateProduct() {
 
-        AuthHelper::verify();
+
         
         if(empty ($_POST['id_productoEditar']) || empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("ERROR EN EDITAR");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2024 a las 18:16:12
+-- Tiempo de generación: 17-10-2024 a las 20:40:56
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -43,7 +43,10 @@ INSERT INTO `alimentos` (`id_alimento`, `nombre`, `descripcion`, `valor`, `id_pr
 (1, 'Bruschetta', 'Pan tostado con tomate y albahaca', 120.00, 1),
 (2, 'Milanesa con puré', 'Milanesa de carne con puré de papas', 450.00, 2),
 (3, 'Tiramisú', 'Postre italiano con café', 200.00, 3),
-(4, 'Coca-Cola', 'Refresco de cola', 80.00, 4);
+(4, 'Sprite', 'Refresco Lima-Limon', 75.00, 4),
+(9, 'Sorrentinos Con Salsa', 'Pastas rellenas de: jamon y muzzarella / pollo/ verdura. Acompañadas con salsa que puede ser de: 4 quesos/mixta/bolognesa', 3500.00, 2),
+(10, 'Gin Tonic', 'Trago con Gin y Agua Tonica, puede ser decorado con Limon/Pomelo/Pepino', 1000.00, 5),
+(11, 'Hamburguesa', 'Hamburguesa doble smasheada , con cebolla caramelizada, bacon y barbacoa, acompañada de papas fritas', 5000.00, 2);
 
 -- --------------------------------------------------------
 
@@ -64,7 +67,27 @@ INSERT INTO `productos` (`id_producto`, `nombre`) VALUES
 (1, 'ENTRADAS'),
 (2, 'PRINCIPALES'),
 (3, 'POSTRES'),
-(4, 'BEBIDAS');
+(4, 'GASEOSAS'),
+(5, 'BEBIDAS ALCOHOLICAS');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `USER_ID` int(200) NOT NULL,
+  `USER_EMAIL` varchar(45) NOT NULL,
+  `PASSWORD` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`USER_ID`, `USER_EMAIL`, `PASSWORD`) VALUES
+(1, 'webadmin@gmail.com', '$2y$10$Mg0NmpgsinNuJPGvgKr7vOFNJ11OgcoI08xKHy3uXcm/Eh2r.hh/y');
 
 --
 -- Índices para tablas volcadas
@@ -84,6 +107,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`USER_ID`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -91,7 +120,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `alimentos`
 --
 ALTER TABLE `alimentos`
-  MODIFY `id_alimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_alimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `USER_ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
