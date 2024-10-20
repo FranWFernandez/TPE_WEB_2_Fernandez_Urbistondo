@@ -5,6 +5,8 @@ class CategoriesView {
         $count = count($categories);
 
         require 'templates/listcategories.phtml';
+        require 'templates/addproduct.phtml';
+        require 'templates/editproduct.phtml';
     }
 
     public function showError($error) {

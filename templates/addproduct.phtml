@@ -1,5 +1,5 @@
 <h1>Agregar Producto</h1>
-<form action="addproduct" method="POST" class="row g-3 border border-bottom border-primary m-5">
+<form action="addproduct" method="POST" enctype="multipart/form-data" class="row g-3 border border-bottom border-primary m-5">
     <div class="col-md-6">
         <label class="form-label">Producto</label>
         <input type="text" name="nombre" class="form-control">
@@ -13,16 +13,19 @@
         <textarea name="descripcion" rows="3"></textarea>
     </div>
     <div class="col-md-6">
-        <label class="form-label">Id Categoria</label>
+        <label class="form-label">Categoria</label>
         <select name="id_producto" >
-            <option value="1">Entrada</option>
-            <option value="2">Principal</option>
-            <option value="3">Postre</option>
-            <option value="4">Gaseosas</option>
-            <option value="5">Bebidas Alcoholicas</option>
-            <option value="6">Jugos</option>
+            <?php foreach ($categories as $category) : ?>
+                <option value="<?= $category->id_producto ?>">
+                    <?php echo $category->nombre ?>
+                </option>                               
+            <?php endforeach ?>
         </select>
     </div>
+    <!--<div class="col-md-6">
+        <label class="form-label">Imagen</label>
+        <input type="file" name="imagen" id="imageToUpload" class="form-control">
+    </div>-->
     <div class="col-md-6">
         <button type="submite" class="btn btn-primary position-absolute end-0">Agregar</button>
     </div>

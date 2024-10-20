@@ -32,9 +32,6 @@ class ProductController {
     } */
 
     public function addProduct() {
-        
-
-
         if(empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("Debe completar todos los campos");
         } else {
@@ -52,18 +49,12 @@ class ProductController {
     }
 
     public function deleteProduct($id) {
-
-
-
         $this->model->removeProduct($id);
 
         header('location:'.BASE_URL.'/product');
     }
 
     public function updateProduct() {
-
-
-        
         if(empty ($_POST['id_productoEditar']) || empty($_POST['nombre']) || empty($_POST['descripcion']) || empty($_POST['valor']) || empty($_POST['id_producto'])){
             $this->view->showError("ERROR EN EDITAR");
         } else {

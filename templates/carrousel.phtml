@@ -1,17 +1,19 @@
 <div id="carouselExampleAutoplaying" class="carousel slide mb-5" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <p><a href="showbycategory">ENTRADAS</a></p>
-    </div>
-    <div class="carousel-item">
-      <p><a href="showbycategory">PRINCIPALES</a></p>
-    </div>
-    <div class="carousel-item">
-      <p><a href="showbycategory">POSTRES</a></p>
-    </div>
-    <div class="carousel-item">
-      <p><a href="showbycategory">BEBIDAS</a></p>
-    </div>
+      <?php
+        $directorio = './images/'; // Directorio donde están las imágenes
+        $imagenes = glob($directorio . "*.{jpg,png,gif,jpeg}", GLOB_BRACE); // Obtener todas las imágenes del directorio
+        $primeraImagen = true; // Variable para marcar la primera imagen como activa
+
+        foreach ($imagenes as $imagen):
+      ?>
+        <div class="carousel-item <?= $primeraImagen ? 'active' : '' ?>">
+            <img src="<?= $imagen ?>" class="d-block w-100 h" alt="Imagen del carrusel">
+        </div>
+      <?php 
+        $primeraImagen = false; // Asegurarse de que solo la primera imagen tenga la clase 'active'
+        endforeach; 
+      ?>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

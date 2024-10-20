@@ -17,16 +17,19 @@
         <textarea class="form-control" name="descripcion" rows="3"></textarea>
     </div>
     <div class="col-md-6">
-        <label class="form-label">id_categoria</label>
-        <select name="id_producto">
-            <option value="1">Entrada</option>
-            <option value="2">Principal</option>
-            <option value="3">Postre</option>
-            <option value="4">Gaseosas</option>
-            <option value="5">Bebidas Alcoholicas</option>
-            <option value="6">Jugos</option>
+    <label class="form-label">Categoria</label>
+        <select name="id_producto" >
+            <?php foreach ($categories as $category) : ?>
+                <option value="<?= $category->id_producto ?>">
+                    <?php echo $category->nombre ?>
+                </option>                               
+            <?php endforeach ?>
         </select>
     </div>
+    <!--<div class="col-md-6">
+        <label class="form-label">Imagen</label>
+        <input type="file" name="imagen" id="imageToUpload" class="form-control">
+    </div>-->
     <div class="col-md-6">
         <button type="submite" class="btn btn-primary position-absolute end-0">Modificar</button>
     </div>
