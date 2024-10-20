@@ -85,6 +85,7 @@ class ProductController {
 
     public function showByCategory($id_producto) {
         $productbycat = $this->model->getProductByCategory($id_producto);
-        $this->view->showByCategory($productbycat);
+        $categories = $this->category->getCategories();
+        $this->view->showByCategory($productbycat, $categories);
     }
 }

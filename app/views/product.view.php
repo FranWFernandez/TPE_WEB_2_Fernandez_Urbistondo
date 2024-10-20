@@ -3,6 +3,13 @@ require_once './app/controllers/product.controller.php';
 
 class ProductView {
 
+    public function showHome($products,$categories) {
+        require 'templates/home.phtml';
+    }
+    public function showItem($Item, $categories){
+        require './templates/aboutproduct.phtml';
+    }
+    
     public function showProducts($products, $categories) {   
         $count = count($products);
 
@@ -13,7 +20,7 @@ class ProductView {
         require_once './templates/error.phtml';
     }
 
-    public function showByCategory($productbycat) {
+    public function showByCategory($productbycat, $categories) {
 
         require 'templates/showbycategory.phtml';
     }

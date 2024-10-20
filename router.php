@@ -55,7 +55,7 @@ switch($params[0]) {
         $controller->updateProduct();
         break;
     case 'showbycategory':
-        $controller = new ProductController();            
+        $controller = new HomeController();            
         $controller->showByCategory($params[1]);
         break;
     case 'category' :
